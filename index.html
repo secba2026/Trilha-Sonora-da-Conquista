@@ -1,140 +1,192 @@
-
-<h2 class="sr-only">App de coleta de músicas para playlist coletiva da Oficina ENEM 2026</h2>
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trilha Sonora da Conquista</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"/>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font-sans); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .app { padding: 1.5rem 1rem; max-width: 480px; margin: 0 auto; }
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f5;
+    --bg3: #eeeeee;
+    --text: #111111;
+    --text2: #555555;
+    --text3: #999999;
+    --border: rgba(0,0,0,0.12);
+    --border2: rgba(0,0,0,0.22);
+    --green: #1DB954;
+    --green-dark: #17a349;
+    --red: #e24b4a;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
 
-  .header { text-align: center; margin-bottom: 1.5rem; }
-  .header-eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px; }
-  .header-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.2; }
-  .header-sub { font-size: 14px; color: var(--color-text-secondary); margin-top: 6px; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a;
+      --bg2: #242424;
+      --bg3: #2e2e2e;
+      --text: #f0f0f0;
+      --text2: #aaaaaa;
+      --text3: #666666;
+      --border: rgba(255,255,255,0.1);
+      --border2: rgba(255,255,255,0.2);
+    }
+  }
 
-  .search-area { margin-bottom: 1.5rem; }
-  .search-wrap { display: flex; gap: 8px; align-items: stretch; }
-  .search-wrap input { flex: 1; font-size: 14px; padding: 0 12px; height: 40px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); }
-  .search-wrap input:focus { outline: none; border-color: #1DB954; box-shadow: 0 0 0 2px rgba(29,185,84,0.15); }
-  .btn-search { height: 40px; padding: 0 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: #1DB954; color: #fff; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; }
-  .btn-search:hover { background: #17a349; }
-  .btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  .results { margin-top: 8px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
-  .result-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; border-bottom: 0.5px solid var(--color-border-tertiary); transition: background 0.1s; }
-  .result-item:last-child { border-bottom: none; }
-  .result-item:hover { background: var(--color-background-secondary); }
-  .result-thumb { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: var(--color-background-secondary); }
-  .result-info { flex: 1; min-width: 0; }
-  .result-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .result-artist { font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .btn-add { flex-shrink: 0; font-size: 12px; padding: 5px 10px; border-radius: var(--border-radius-md); border: 0.5px solid #1DB954; color: #1DB954; background: transparent; cursor: pointer; font-weight: 500; }
-  .btn-add:hover { background: rgba(29,185,84,0.08); }
-  .btn-add.added { border-color: var(--color-border-tertiary); color: var(--color-text-tertiary); cursor: default; }
+  .app { padding: 2rem 1rem; max-width: 480px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 1.75rem; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+  .title { font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.2; }
+  .subtitle { font-size: 14px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+
+  .toggle { display: flex; gap: 4px; margin-bottom: 1.75rem; background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 4px; }
+  .toggle-btn { flex: 1; font-size: 13px; font-weight: 500; padding: 8px 0; border: none; border-radius: 6px; cursor: pointer; background: transparent; color: var(--text2); transition: all 0.15s; }
+  .toggle-btn.active { background: var(--bg); color: var(--text); border: 0.5px solid var(--border2); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+  .label { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+
+  input[type="text"] {
+    width: 100%; font-size: 14px; padding: 0 12px; height: 40px;
+    border-radius: var(--radius); border: 0.5px solid var(--border2);
+    background: var(--bg); color: var(--text);
+    outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type="text"]:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(29,185,84,0.15); }
+  input[type="text"]::placeholder { color: var(--text3); }
 
   .name-wrap { margin-bottom: 1rem; }
-  .name-wrap input { width: 100%; font-size: 14px; padding: 0 12px; height: 36px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); }
-  .name-wrap input:focus { outline: none; border-color: #1DB954; box-shadow: 0 0 0 2px rgba(29,185,84,0.15); }
-  .name-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 5px; }
 
-  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+  .search-row { display: flex; gap: 8px; margin-bottom: 0; }
+  .search-row input { flex: 1; }
+
+  .btn-search {
+    height: 40px; padding: 0 18px; border-radius: var(--radius);
+    border: none; background: var(--green); color: #fff;
+    font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px; transition: background 0.15s;
+  }
+  .btn-search:hover { background: var(--green-dark); }
+  .btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status { font-size: 12px; color: var(--text3); text-align: center; padding: 10px 0 0; min-height: 28px; }
+
+  .results { margin-top: 10px; border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .result-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 0.5px solid var(--border); transition: background 0.1s; }
+  .result-item:last-child { border-bottom: none; }
+  .result-item:hover { background: var(--bg2); }
+  .thumb { width: 40px; height: 40px; border-radius: 4px; flex-shrink: 0; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text2); }
+  .result-info { flex: 1; min-width: 0; }
+  .result-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .result-artist { font-size: 12px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .btn-add { flex-shrink: 0; font-size: 12px; padding: 5px 11px; border-radius: var(--radius); border: 0.5px solid var(--green); color: var(--green); background: transparent; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: background 0.1s; }
+  .btn-add:hover { background: rgba(29,185,84,0.08); }
+  .btn-add.added { border-color: var(--border); color: var(--text3); cursor: default; background: transparent; }
 
   .playlist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-  .playlist-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); display: flex; align-items: center; gap: 8px; }
-  .count-badge { font-size: 11px; background: #1DB954; color: #fff; border-radius: 99px; padding: 2px 8px; font-weight: 500; }
-  .btn-export { font-size: 12px; padding: 5px 10px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; gap: 4px; }
-  .btn-export:hover { background: var(--color-background-secondary); }
+  .playlist-title { font-size: 15px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .badge { font-size: 11px; background: var(--green); color: #fff; border-radius: 99px; padding: 2px 8px; font-weight: 600; }
+  .btn-export { font-size: 12px; padding: 5px 11px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background 0.1s; }
+  .btn-export:hover { background: var(--bg2); }
 
-  .playlist-empty { text-align: center; padding: 2rem 1rem; color: var(--color-text-tertiary); font-size: 13px; }
+  .empty { text-align: center; padding: 2.5rem 1rem; color: var(--text3); font-size: 13px; line-height: 1.8; }
+  .empty i { font-size: 32px; display: block; margin-bottom: 10px; color: var(--text3); }
 
-  .track-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .track-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
   .track-item:last-child { border-bottom: none; }
-  .track-num { font-size: 12px; color: var(--color-text-tertiary); width: 18px; text-align: right; flex-shrink: 0; }
-  .track-thumb { width: 36px; height: 36px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: var(--color-background-secondary); }
+  .track-num { font-size: 12px; color: var(--text3); width: 18px; text-align: right; flex-shrink: 0; }
   .track-info { flex: 1; min-width: 0; }
-  .track-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .track-artist { font-size: 12px; color: var(--color-text-secondary); }
-  .track-by { font-size: 11px; color: var(--color-text-tertiary); margin-top: 1px; }
-  .btn-remove { flex-shrink: 0; font-size: 18px; color: var(--color-text-tertiary); background: none; border: none; cursor: pointer; line-height: 1; padding: 2px 4px; border-radius: 4px; }
-  .btn-remove:hover { color: #e24b4a; background: var(--color-background-secondary); }
+  .track-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .track-artist { font-size: 12px; color: var(--text2); }
+  .track-by { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .btn-remove { flex-shrink: 0; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 18px; padding: 2px 4px; border-radius: 4px; line-height: 1; transition: color 0.1s, background 0.1s; }
+  .btn-remove:hover { color: var(--red); background: var(--bg2); }
 
-  .status { font-size: 12px; color: var(--color-text-tertiary); text-align: center; padding: 8px 0; }
+  .hint { font-size: 12px; color: var(--text3); text-align: center; padding: 10px 0 0; }
 
-  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 10px 18px; font-size: 13px; color: var(--color-text-primary); opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(16px);
+    background: var(--bg); border: 0.5px solid var(--border2); border-radius: var(--radius-lg);
+    padding: 10px 20px; font-size: 13px; color: var(--text); opacity: 0;
+    transition: all 0.22s; pointer-events: none; white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  .mode-toggle { display: flex; gap: 6px; margin-bottom: 1.5rem; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 4px; background: var(--color-background-secondary); }
-  .mode-btn { flex: 1; font-size: 12px; padding: 6px 0; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; background: transparent; color: var(--color-text-secondary); }
-  .mode-btn.active { background: var(--color-background-primary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-tertiary); }
-
-  .admin-hint { font-size: 12px; color: var(--color-text-tertiary); text-align: center; padding: 6px 0 0; }
 </style>
-
+</head>
+<body>
 <div class="app">
   <div class="header">
-    <div class="header-eyebrow">Oficina ENEM 2026 · Conquista</div>
-    <div class="header-title">Trilha Sonora da Conquista</div>
-    <div class="header-sub">Qual música estará tocando em novembro quando atingir todas suas metas?</div>
+    <div class="eyebrow">Oficina ENEM 2026 &middot; Conquista</div>
+    <div class="title">Trilha Sonora da Conquista</div>
+    <div class="subtitle">Qual música estará tocando em novembro<br>quando atingir todas suas metas?</div>
   </div>
 
-  <div class="mode-toggle">
-    <button class="mode-btn active" onclick="setMode('add')" id="btn-mode-add">Indicar música</button>
-    <button class="mode-btn" onclick="setMode('view')" id="btn-mode-view">Ver playlist <span id="badge-count" class="count-badge" style="display:none"></span></button>
+  <div class="toggle">
+    <button class="toggle-btn active" id="btn-add" onclick="setMode('add')">
+      <i class="ti ti-music"></i> Indicar música
+    </button>
+    <button class="toggle-btn" id="btn-view" onclick="setMode('view')">
+      <i class="ti ti-list"></i> Ver playlist <span id="badge-count" class="badge" style="display:none"></span>
+    </button>
   </div>
 
   <div id="panel-add">
     <div class="name-wrap">
-      <div class="name-label">Seu nome (aparece na playlist)</div>
-      <input type="text" id="input-name" placeholder="Ex: Maria Souza" maxlength="40" />
+      <div class="label">Seu nome (aparece na playlist)</div>
+      <input type="text" id="input-name" placeholder="Ex: Maria Souza" maxlength="40"/>
     </div>
-
-    <div class="search-area">
-      <div class="search-wrap">
-        <input type="text" id="input-search" placeholder="Nome da música ou artista..." onkeydown="if(event.key==='Enter') doSearch()" />
-        <button class="btn-search" id="btn-search" onclick="doSearch()">
-          <i class="ti ti-search" aria-hidden="true"></i> Buscar
-        </button>
-      </div>
-      <div id="search-results"></div>
-      <div id="search-status" class="status"></div>
+    <div class="label">Nome da música ou artista</div>
+    <div class="search-row">
+      <input type="text" id="input-search" placeholder="Ex: Emicida, Seu Jorge, Beyoncé..." onkeydown="if(event.key==='Enter') doSearch()"/>
+      <button class="btn-search" id="btn-search" onclick="doSearch()">
+        <i class="ti ti-search"></i> Buscar
+      </button>
     </div>
+    <div id="search-status" class="status"></div>
+    <div id="search-results"></div>
   </div>
 
   <div id="panel-view" style="display:none">
     <div class="playlist-header">
       <div class="playlist-title">
-        <i class="ti ti-music" aria-hidden="true"></i>
+        <i class="ti ti-music" style="color:var(--green)"></i>
         Trilha Sonora da Conquista
-        <span class="count-badge" id="track-count">0</span>
+        <span class="badge" id="track-count">0</span>
       </div>
       <button class="btn-export" onclick="exportList()">
-        <i class="ti ti-download" aria-hidden="true"></i> Exportar
+        <i class="ti ti-download"></i> Exportar
       </button>
     </div>
     <div id="playlist-container"></div>
-    <div class="admin-hint">A equipe monta a playlist no Spotify durante o almoço</div>
+    <div class="hint">A equipe monta a playlist no Spotify durante o almoço</div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const STORAGE_KEY = 'playlist_enem2026_v1';
+const STORAGE_KEY = 'trilha_conquista_v1';
 let tracks = [];
 let searchResults = [];
-let currentMode = 'add';
 
-async function loadTracks() {
+function loadTracks() {
   try {
-    const r = await window.storage.get(STORAGE_KEY, true);
-    if (r && r.value) tracks = JSON.parse(r.value);
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) tracks = JSON.parse(raw);
   } catch(e) { tracks = []; }
   renderPlaylist();
   updateBadge();
 }
 
-async function saveTracks() {
-  try { await window.storage.set(STORAGE_KEY, JSON.stringify(tracks), true); } catch(e) {}
+function saveTracks() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tracks)); } catch(e) {}
 }
 
 function showToast(msg) {
@@ -145,24 +197,20 @@ function showToast(msg) {
 }
 
 function setMode(mode) {
-  currentMode = mode;
   document.getElementById('panel-add').style.display = mode === 'add' ? 'block' : 'none';
   document.getElementById('panel-view').style.display = mode === 'view' ? 'block' : 'none';
-  document.getElementById('btn-mode-add').className = 'mode-btn' + (mode === 'add' ? ' active' : '');
-  document.getElementById('btn-mode-view').className = 'mode-btn' + (mode === 'view' ? ' active' : '');
+  document.getElementById('btn-add').className = 'toggle-btn' + (mode === 'add' ? ' active' : '');
+  document.getElementById('btn-view').className = 'toggle-btn' + (mode === 'view' ? ' active' : '');
   if (mode === 'view') renderPlaylist();
 }
 
 function updateBadge() {
-  const b = document.getElementById('badge-count');
-  const tc = document.getElementById('track-count');
-  if (tracks.length > 0) {
-    b.style.display = 'inline';
-    b.textContent = tracks.length;
-  } else {
-    b.style.display = 'none';
-  }
-  if (tc) tc.textContent = tracks.length;
+  ['badge-count','track-count'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (tracks.length > 0) { el.style.display = 'inline'; el.textContent = tracks.length; }
+    else { el.style.display = 'none'; }
+  });
 }
 
 async function doSearch() {
@@ -173,24 +221,19 @@ async function doSearch() {
   btn.disabled = true;
   status.textContent = 'Buscando...';
   document.getElementById('search-results').innerHTML = '';
-
   try {
-    const resp = await fetch(`https://api.anthropic.com/v1/messages`, {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
         max_tokens: 1000,
-        messages: [{
-          role: 'user',
-          content: `Busca por músicas: "${q}". Retorne SOMENTE um JSON válido (sem markdown), array com até 5 resultados, cada item com: name (string), artist (string), album (string), year (number). Priorize músicas populares em português e inglês. Sem comentários, sem backticks.`
-        }]
+        messages: [{ role: 'user', content: `Busca por músicas: "${q}". Retorne SOMENTE um JSON válido (sem markdown), array com até 5 resultados, cada item com: name (string), artist (string), year (number). Priorize músicas populares em português e inglês. Sem comentários, sem backticks.` }]
       })
     });
     const data = await resp.json();
     const text = data.content.filter(c => c.type === 'text').map(c => c.text).join('');
-    const clean = text.replace(/```json|```/g, '').trim();
-    searchResults = JSON.parse(clean);
+    searchResults = JSON.parse(text.replace(/```json|```/g,'').trim());
     renderResults();
     status.textContent = '';
   } catch(e) {
@@ -199,43 +242,45 @@ async function doSearch() {
   btn.disabled = false;
 }
 
-function renderResults() {
-  const container = document.getElementById('search-results');
-  if (!searchResults.length) { container.innerHTML = ''; return; }
-  const addedIds = new Set(tracks.map(t => t.id));
-  container.innerHTML = '<div class="results">' +
-    searchResults.map((s, i) => {
-      const id = s.name + '|' + s.artist;
-      const isAdded = addedIds.has(id);
-      const initials = s.artist.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-      return `<div class="result-item">
-        <div class="result-thumb" style="display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-secondary)">${initials}</div>
-        <div class="result-info">
-          <div class="result-name">${s.name}</div>
-          <div class="result-artist">${s.artist} · ${s.year || ''}</div>
-        </div>
-        <button class="btn-add${isAdded?' added':''}" onclick="addTrack(${i})" ${isAdded?'disabled':''}>
-          ${isAdded ? '<i class="ti ti-check" aria-hidden="true"></i>' : '<i class="ti ti-plus" aria-hidden="true"></i> Adicionar'}
-        </button>
-      </div>`;
-    }).join('') + '</div>';
+function initials(str) {
+  return str.split(' ').map(w => w[0]||'').join('').slice(0,2).toUpperCase();
 }
 
-async function addTrack(i) {
+function renderResults() {
+  const c = document.getElementById('search-results');
+  if (!searchResults.length) { c.innerHTML = ''; return; }
+  const addedIds = new Set(tracks.map(t => t.id));
+  c.innerHTML = '<div class="results">' + searchResults.map((s,i) => {
+    const id = s.name+'|'+s.artist;
+    const isAdded = addedIds.has(id);
+    return `<div class="result-item">
+      <div class="thumb">${initials(s.artist)}</div>
+      <div class="result-info">
+        <div class="result-name">${s.name}</div>
+        <div class="result-artist">${s.artist}${s.year?' · '+s.year:''}</div>
+      </div>
+      <button class="btn-add${isAdded?' added':''}" onclick="addTrack(${i})" ${isAdded?'disabled':''}>
+        ${isAdded ? '<i class="ti ti-check"></i>' : '<i class="ti ti-plus"></i> Adicionar'}
+      </button>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function addTrack(i) {
   const s = searchResults[i];
   const name = document.getElementById('input-name').value.trim() || 'Participante';
-  const id = s.name + '|' + s.artist;
+  const id = s.name+'|'+s.artist;
   if (tracks.find(t => t.id === id)) { showToast('Essa música já está na playlist'); return; }
-  tracks.push({ id, name: s.name, artist: s.artist, album: s.album, year: s.year, by: name, ts: Date.now() });
-  await saveTracks();
+  tracks.push({ id, name: s.name, artist: s.artist, year: s.year, by: name, ts: Date.now() });
+  saveTracks();
   updateBadge();
   renderResults();
   showToast('Adicionado à playlist!');
 }
 
-async function removeTrack(id) {
+function removeTrack(id) {
   tracks = tracks.filter(t => t.id !== id);
-  await saveTracks();
+  saveTracks();
   updateBadge();
   renderPlaylist();
 }
@@ -244,33 +289,33 @@ function renderPlaylist() {
   const c = document.getElementById('playlist-container');
   if (!c) return;
   if (!tracks.length) {
-    c.innerHTML = '<div class="playlist-empty"><i class="ti ti-music-off" aria-hidden="true" style="font-size:28px;display:block;margin-bottom:8px"></i>Nenhuma música ainda.<br>Seja o primeiro a indicar!</div>';
+    c.innerHTML = '<div class="empty"><i class="ti ti-music-off"></i>Nenhuma música ainda.<br>Seja o primeiro a indicar!</div>';
     return;
   }
-  const sorted = [...tracks].sort((a, b) => a.ts - b.ts);
-  c.innerHTML = sorted.map((t, i) => {
-    const initials = t.artist.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-    return `<div class="track-item">
-      <span class="track-num">${i+1}</span>
-      <div class="track-thumb" style="display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-secondary)">${initials}</div>
-      <div class="track-info">
-        <div class="track-name">${t.name}</div>
-        <div class="track-artist">${t.artist} · ${t.year||''}</div>
-        <div class="track-by">indicada por ${t.by}</div>
-      </div>
-      <button class="btn-remove" onclick="removeTrack('${t.id}')" aria-label="Remover"><i class="ti ti-x" aria-hidden="true"></i></button>
-    </div>`;
-  }).join('');
+  const sorted = [...tracks].sort((a,b) => a.ts - b.ts);
+  c.innerHTML = sorted.map((t,i) => `<div class="track-item">
+    <span class="track-num">${i+1}</span>
+    <div class="thumb" style="width:36px;height:36px;font-size:11px">${initials(t.artist)}</div>
+    <div class="track-info">
+      <div class="track-name">${t.name}</div>
+      <div class="track-artist">${t.artist}${t.year?' · '+t.year:''}</div>
+      <div class="track-by">indicada por ${t.by}</div>
+    </div>
+    <button class="btn-remove" onclick="removeTrack('${t.id.replace(/'/g,"\\'")}')"><i class="ti ti-x"></i></button>
+  </div>`).join('');
   const tc = document.getElementById('track-count');
   if (tc) tc.textContent = tracks.length;
 }
 
 function exportList() {
   if (!tracks.length) { showToast('A playlist está vazia'); return; }
-  const sorted = [...tracks].sort((a, b) => a.ts - b.ts);
-  const text = sorted.map((t, i) => `${i+1}. ${t.name} — ${t.artist} (indicada por ${t.by})`).join('\n');
-  sendPrompt('Aqui está a lista de músicas da Trilha Sonora da Conquista:\n\n' + text + '\n\nPode formatar isso de forma organizada e me dar uma prévia de como vai ficar a playlist?');
+  const sorted = [...tracks].sort((a,b) => a.ts - b.ts);
+  const text = '🎵 Trilha Sonora da Conquista — Oficina ENEM 2026\n\n' +
+    sorted.map((t,i) => `${i+1}. ${t.name} — ${t.artist} (indicada por ${t.by})`).join('\n');
+  navigator.clipboard.writeText(text).then(() => showToast('Lista copiada!')).catch(() => showToast('Copie o texto acima'));
 }
 
 loadTracks();
 </script>
+</body>
+</html>
